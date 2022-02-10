@@ -22,7 +22,7 @@
     "eslint-plugin-vue": "^7.0.0"
   },
   "eslintConfig": {
-    "root": true,
+    "root": false,
     "env": {
       "node": true
     },
