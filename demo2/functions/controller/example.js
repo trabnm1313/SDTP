@@ -25,12 +25,27 @@ exampleController.get("/create", async (req, res) => {
     }
 })
 
+app.get('/getFood', async(request, response) => {
+    try {
+        const menu = []
+        await db.collection('Menu').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const food = { id: doc.id, name: doc.data().name }
+                menu.push(food)
+            })
+        })
+        return response.status(200).json(menu)
+    } catch(exception) {
+        return response.status(400).json(ไปซ่อมมา)
+    }
+})
+
 app.post('/createFood', async(request, response) => {
     const data = request.body
     try {
-         await data.menus.forEach(menu => {
+        await data.menus.forEach(menu => {
             db.collection('Menu').add(menu)
-        });
+        })
         return response.json('Food Added')
     } catch(exception) {
         return response.status(400).json(ไปซ่อมมา)
