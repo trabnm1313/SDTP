@@ -2,6 +2,9 @@ const admin = require("../admin");
 const db = admin.firestore();
 const express = require('express');
 const exampleController = express();
+var cors = require('cors')
+
+exampleController.use(cors())
 
 //Variables
 const PORT = 8080

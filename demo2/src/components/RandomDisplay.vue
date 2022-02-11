@@ -17,24 +17,20 @@
       </div>
       <div id="list-card" class="columns mb-0">
         <div
-          v-for="(item, index) in items"
+          v-for="(item, index) in result"
           :key="index"
           class="column"
           style="margin: 20px"
         >
           <div id="food-card" class="is-4 p-4" :key="index">
             <a @click="setToggleOn(index)">
-              <img
-                id="card-pic"
-                :src="require('../assets/' + item.url)"
-                alt="pic1"
-              />
+              <img id="card-pic" :src="item.imageURL" alt="pic1" />
             </a>
           </div>
         </div>
       </div>
       <div class="level-item">
-        <a href="#">
+        <a @click="getData()">
           <div id="random-button" class="level-item mt-2 mb-3">
             <h1 class="title">สุ่มใหม่</h1>
           </div>
@@ -44,7 +40,7 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal" :class="{ 'is-active': toggle }">
+  <div v-if="toggle === true" class="modal" :class="{ 'is-active': toggle }">
     <div class="modal-background" @click="setToggleOff()"></div>
     <div class="modal-card">
       <section
@@ -52,35 +48,31 @@
         class="level-item modal-card-body"
       >
         <div id="modal-head" class="p-3">
-          <h1 class="title">ผัดกระเพราหมูสับ</h1>
+          <h1 class="title">{{ result[selected].name }}</h1>
         </div>
       </section>
       <section class="level-item modal-card-body pb-0">
         <div class="columns mb-0">
           <div id="modal-picture-clover" class="p-4">
-            <img
-              id="modal-pic"
-              :src="require('../assets/' + items[selected].url)"
-              alt="pic1"
-            />
+            <img id="modal-pic" :src="result[selected].imageURL" alt="pic1" />
           </div>
         </div>
       </section>
       <section class="level-item modal-card-body pb-0">
         <div id="modal-desciption" class="p-3">
-          <p class="ml-6" style="font-size: 20px; text-align: left">
-            <b>ส่วนประกอบ</b>: {{ items[selected].ingre[0] }}
-            {{ items[selected].ingre[1] }} {{ items[selected].ingre[2] }}
+          <p id="food-desciption" class="ml-6" style="font-size: 20px; text-align: left">
+            <b>ส่วนประกอบ</b>: {{ result[selected].recipe.Ingredient[0] }}
+            {{ result[selected].recipe.Ingredient[1] }} {{ result[selected].recipe.Ingredient[2] }}
           </p>
           <p class="ml-6" style="font-size: 20px; text-align: left">
-            <b>แคลอรี่</b>: {{ items[selected].calories }} กิโลแคล
+            <b>แคลอรี่</b>: {{ result[selected].calorie }} กิโลแคล
           </p>
           <p
             id="food-desciption"
             class="ml-6"
             style="text-align: left; font-size: 20px"
           >
-            <b>รายละเอียด</b>: {{ items[selected].des }}
+            <b>รายละเอียด</b>: {{ result[selected].description }}
           </p>
         </div>
       </section>
@@ -106,12 +98,15 @@
 
 
 <script>
+const axios = require("axios");
+
 export default {
   name: "RandomDisplay",
   data() {
     return {
       selected: 0,
       toggle: false,
+      result: [],
       items: [
         {
           url: "test1.jpeg",
@@ -134,7 +129,16 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.getData();
+  },
   methods: {
+    async getData() {
+      let response = await axios.post("http://localhost:8080/randomMenu", {
+        tags: ["เส้น"],
+      });
+      this.result = response.data.menu;
+    },
     setToggleOn(index) {
       this.selected = index;
       this.toggle = true;
