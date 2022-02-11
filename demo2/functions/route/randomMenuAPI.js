@@ -15,7 +15,34 @@ router.get("/", (req, res) => {
         menuRef.where("tags", "array-contains-any", tags).get().then(querySnapshot => {
             let tempDataList = []
             querySnapshot.forEach(menu => {
-                tempDataList.push(menu.data()["tags"])
+                tempDataList.push(menu.data())
+            })
+
+            let randomMenu = []
+            let randomNumber = 0
+            let maxRandomNumber = tempDataList.length >= 3 ? 3 : tempDataList.length
+            for(let num=0; num<maxRandomNumber; num++){
+                randomNumber = Math.floor(Math.random() * tempDataList.length)
+                randomMenu.push(tempDataList[randomNumber])
+                tempDataList.splice(randomNumber, 1)
+            }
+
+            res.status(200).json({
+                message: "OK",
+                menu: randomMenu
+            })
+        }).catch(error => {
+            console.log(error)
+            res.status(400).json({
+                message: "Something went wrong.",
+                err: error
+            })
+        })
+    }else{
+        menuRef.get().then(querySnapshot => {
+            let tempDataList = []
+            querySnapshot.forEach(menu => {
+                tempDataList.push(menu.data())
             })
 
             let randomMenu = []
