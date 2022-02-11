@@ -1,6 +1,10 @@
 <template>
-  <div class="hero">
-      <RandomDisplay />
+  <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+      <router-link to="/filtermenu">FilterMenu</router-link>
+      <router-view />
+
   </div>
 </template>
 
@@ -25,7 +29,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  height: 100%;
+
+  color: #2c3e50;
+  background-color: #cacaca;
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
+
 }
 
 </style>
