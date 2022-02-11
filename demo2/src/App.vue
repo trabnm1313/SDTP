@@ -1,6 +1,6 @@
 <template>
-  <div id="nav">
-      <router-view />
+  <div class="hero">
+      <!-- <RandomDisplay /> -->
   </div>
 </template>
 
@@ -11,12 +11,13 @@ export default {
 </script>
 
 <style>
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Prompt', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
