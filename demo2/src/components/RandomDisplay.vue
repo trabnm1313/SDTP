@@ -60,7 +60,7 @@
           <div id="modal-picture-clover" class="p-4">
             <img
               id="modal-pic"
-              :src="require('../assets/' + items[seleted].url)"
+              :src="require('../assets/' + items[selected].url)"
               alt="pic1"
             />
           </div>
@@ -69,18 +69,18 @@
       <section class="level-item modal-card-body pb-0">
         <div id="modal-desciption" class="p-3">
           <p class="ml-6" style="font-size: 20px; text-align: left">
-            <b>ส่วนประกอบ</b>: {{ items[seleted].ingre[0] }}
-            {{ items[seleted].ingre[1] }} {{ items[seleted].ingre[2] }}
+            <b>ส่วนประกอบ</b>: {{ items[selected].ingre[0] }}
+            {{ items[selected].ingre[1] }} {{ items[selected].ingre[2] }}
           </p>
           <p class="ml-6" style="font-size: 20px; text-align: left">
-            <b>แคลอรี่</b>: {{ items[seleted].calories }} กิโลแคล
+            <b>แคลอรี่</b>: {{ items[selected].calories }} กิโลแคล
           </p>
           <p
             id="food-desciption"
             class="ml-6"
             style="text-align: left; font-size: 20px"
           >
-            <b>รายละเอียด</b>: {{ items[seleted].des }}
+            <b>รายละเอียด</b>: {{ items[selected].des }}
           </p>
         </div>
       </section>
@@ -110,7 +110,7 @@ export default {
   name: "RandomDisplay",
   data() {
     return {
-      seleted: 0,
+      selected: 0,
       toggle: false,
       items: [
         {
@@ -136,8 +136,7 @@ export default {
   },
   methods: {
     setToggleOn(index) {
-      console.log(index);
-      this.seleted = index;
+      this.selected = index;
       this.toggle = true;
     },
     setToggleOff() {
