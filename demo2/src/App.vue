@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div class="hero">
       <RandomDisplay />
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   height: 100%;
 }
+
 </style>
