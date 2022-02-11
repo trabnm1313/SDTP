@@ -3,6 +3,17 @@ const db = admin.firestore();
 const express = require('express');
 const exampleController = express();
 
+//Variables
+const PORT = 8080
+
+//Routes Variables
+const randomMenuAPI = require("../route/randomMenuAPI")
+
+//Routes uses
+exampleController.use("/randomMenu", randomMenuAPI)
+
+exampleController.use(express.json())
+
 exampleController.get("/", (req, res) => {
     res.status(200).send({
         'CODE' : "OK",
@@ -21,5 +32,7 @@ exampleController.get("/create", async (req, res) => {
         })
     }
 })
+
+exampleController.listen(PORT, () => { console.log(`Server running on port ${PORT}`) })
 
 module.exports = exampleController;

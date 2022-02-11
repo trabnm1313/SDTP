@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "sdtp-ff808"
-  }
+    "default": "sdtp-81222",
+    "newInstance": "sdtp-81222"
+  },
+  "targets": {}
 }
