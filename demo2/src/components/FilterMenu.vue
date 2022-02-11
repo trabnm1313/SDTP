@@ -72,41 +72,41 @@
         </div>
     </div>
     
-    <!-- ModalNooddle -->
-    <div class="modal" :class="{'is-active':nooddleModal}">
+    <!-- ModalNoodle -->
+    <div class="modal" :class="{'is-active':noodleModal}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
             <p class="modal-card-title">เส้น</p>
-            <button class="delete" aria-label="close" @click="nooddleModal = !nooddleModal"></button>
+            <button class="delete" aria-label="close" @click="noodleModal = !noodleModal"></button>
             </header>
             <section class="modal-card-body">
             <!-- Content ... -->
               <div class="form-check ">
-                <input class="form-check-input" type="radio" value="ก๋วยเตี๋ยว" v-model="nooddle">
+                <input class="form-check-input" type="radio" value="ก๋วยเตี๋ยว" v-model="noodle">
                 &nbsp;
                 <label class="form-check-label" for="one">ก๋วยเตี๋ยว</label>
                 <br>
-                <input class="form-check-input" type="radio" value="ราเมงและอุด้ง" v-model="nooddle">
+                <input class="form-check-input" type="radio" value="ราเมงและอุด้ง" v-model="noodle">
                 &nbsp;
                 <label class="form-check-label" for="two">ราเมงและอุด้ง</label>
                 <br>
-                <input class="form-check-input" type="radio" value="พาสต้า" v-model="nooddle">
+                <input class="form-check-input" type="radio" value="พาสต้า" v-model="noodle">
                 &nbsp;
                 <label class="form-check-label" for="three">พาสต้า</label>
                 <br>
-                <input class="form-check-input" type="radio" value="ขนมจีน" v-model="nooddle">
+                <input class="form-check-input" type="radio" value="ขนมจีน" v-model="noodle">
                 &nbsp;
                 <label class="form-check-label" for="three">ขนมจีน</label>
                 <br>
-                <input class="form-check-input" type="radio" value="อะไรก็ได้" v-model="nooddle">
+                <input class="form-check-input" type="radio" value="อะไรก็ได้" v-model="noodle">
                 &nbsp;
                 <label class="form-check-label" for="three">อะไรก็ได้!</label>
               </div>
             </section>
             <footer class="modal-card-foot">
-            <button class="button is-success" :disabled="!nooddle" @click="nooddleModal = !nooddleModal,ingredientModal = !ingredientModal">Next</button>
-            <button class="button" @click="nooddleModal = !nooddleModal">Cancel</button>
+            <button class="button is-success" :disabled="!noodle" @click="noodleModal = !noodleModal,ingredientModal = !ingredientModal">Next</button>
+            <button class="button" @click="noodleModal = !noodleModal">Cancel</button>
             </footer>
         </div>
     </div>
@@ -163,8 +163,8 @@ export default {
       menu:null,
       methodModal:false,
       method:null,
-      nooddleModal:false,
-      nooddle:null,
+      noodleModal:false,
+      noodle:null,
       ingredientModal:false,
       ingredient:null,
       ans:{}
@@ -178,7 +178,7 @@ export default {
       }
       else{
         this.methodModal = false;
-        this.nooddleModal = true;
+        this.noodleModal = true;
       }
     },
     randomMenu(){
