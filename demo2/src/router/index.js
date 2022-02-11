@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import HelloWorld from "../components/HelloWorld.vue";
 import Home from "../components/Home.vue";
+import FilterMenu from "../components/FilterMenu.vue";
 
 const routes = [
     {
@@ -12,6 +13,11 @@ const routes = [
       path: "/about",
       name: "About",
       component: HelloWorld,
+    },
+    {
+      path: "/filtermenu",
+      name: "FilterMenu",
+      component: FilterMenu,
     },
 ];
 

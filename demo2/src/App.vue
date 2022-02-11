@@ -2,6 +2,7 @@
   <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <router-link to="/filtermenu">FilterMenu</router-link>
       <router-view />
   </div>
 </template>
@@ -19,6 +20,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: #cacaca;
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
 }
 </style>
