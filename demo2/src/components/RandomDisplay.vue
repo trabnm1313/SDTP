@@ -86,13 +86,13 @@
         class="level-item modal-card-footer"
       >
         <div id="modal-button-layout" class="level-item m-2">
-          <a>
+          <a @click="alert()">
             <div id="button" class="button level-item">วิธีทำ</div>
           </a>
         </div>
         <div id="modal-button-layout" class="level-item">
-          <a>
-            <div id="button" class="button level-item">สั่งซื้อ</div>
+          <a @click="alert()">
+            <div id="button" class="button level-item" >สั่งซื้อ</div>
           </a>
         </div>
       </section>
@@ -133,6 +133,9 @@ export default {
     },
     toHome() {
       this.$router.go(-2)
+    },
+    alert() {
+      alert("ยังไม่พร้อมใช้งาน")
     },
     setToggleOn(index) {
       this.selected = index;
