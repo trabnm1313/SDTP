@@ -26,7 +26,7 @@
           </div>
           <footer class="card-footer">
             <button class="button is-success card-footer-item " :disabled="!menu" @click="methodModal = !methodModal">Next</button>
-            <button class="button is-light card-footer-item">Back</button>
+            <button class="button is-light card-footer-item" @click="this.$router.back()">Back</button>
           </footer>
         </div>
       </div>
@@ -181,8 +181,10 @@ export default {
         this.noodleModal = true;
       }
     },
-    randomMenu(){
-    
+    randomMenu() {
+      let userWant = this.menu + "&" + this.method + "&" + this.noodle + "&" + this.ingredient
+      
+      this.$router.push('/randomdisplay/' + userWant)
     }
   }
 }

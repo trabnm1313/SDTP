@@ -2,9 +2,12 @@ const admin = require("../admin");
 const db = admin.firestore();
 const express = require('express');
 const exampleController = express();
+var cors = require('cors')
+
+exampleController.use(cors({ origin: "*" }))
 
 //Variables
-const PORT = 8080
+const PORT = 3000
 
 //Routes Variables
 const randomMenuAPI = require("../route/randomMenuAPI")

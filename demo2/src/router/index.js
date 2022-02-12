@@ -9,7 +9,6 @@ const routes = [
     {
       path: "/",
       name: "Home",
-
       component: Home,
     },
     {
@@ -18,7 +17,7 @@ const routes = [
       component: FilterMenu,
     },
     {
-      path: "/randomdisplay",
+      path: "/randomdisplay/:tags",
       name: "RandomDisplay",
       component: RandomDisplay
     }
