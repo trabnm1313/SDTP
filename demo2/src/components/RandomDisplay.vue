@@ -3,7 +3,7 @@
     <div id="top-bar" class="box mb-0">
       <div class="level-left">
         <a href="#">
-          <div id="logo" class="columns level-item">
+          <div id="logo" class="columns level-item" @click="toHome()">
             <h1 class="title">Home</h1>
           </div>
         </a>
@@ -60,9 +60,14 @@
       </section>
       <section class="level-item modal-card-body pb-0">
         <div id="modal-desciption" class="p-3">
-          <p id="food-desciption" class="ml-6" style="font-size: 20px; text-align: left">
+          <p
+            id="food-desciption"
+            class="ml-6"
+            style="font-size: 20px; text-align: left"
+          >
             <b>ส่วนประกอบ</b>: {{ result[selected].recipe.Ingredient[0] }}
-            {{ result[selected].recipe.Ingredient[1] }} {{ result[selected].recipe.Ingredient[2] }}
+            {{ result[selected].recipe.Ingredient[1] }}
+            {{ result[selected].recipe.Ingredient[2] }}
           </p>
           <p class="ml-6" style="font-size: 20px; text-align: left">
             <b>แคลอรี่</b>: {{ result[selected].calorie }} กิโลแคล
@@ -130,14 +135,23 @@ export default {
     };
   },
   mounted() {
-    this.getData();
+    let routeParams = this.$route.params.tags;
+    let paramsArray = routeParams.split("&");
+    let queryParams = paramsArray.filter(
+      (item) => item != "null" && item != "อะไรก็ได้"
+    );
+
+    this.getData(queryParams);
   },
   methods: {
-    async getData() {
+    async getData(array) {
       let response = await axios.post("http://localhost:8080/randomMenu", {
-        tags: ["เส้น"],
+        tags: array,
       });
       this.result = response.data.menu;
+    },
+    toHome() {
+      this.$router.go(-2)
     },
     setToggleOn(index) {
       this.selected = index;
