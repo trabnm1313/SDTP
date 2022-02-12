@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="level-item">
-        <a @click="getData()">
+        <a @click="getData(this.savedParams)">
           <div id="random-button" class="level-item mt-2 mb-3">
             <h1 class="title">สุ่มใหม่</h1>
           </div>
@@ -112,26 +112,7 @@ export default {
       selected: 0,
       toggle: false,
       result: [],
-      items: [
-        {
-          url: "test1.jpeg",
-          ingre: ["ingre1", "ingre2", "ingre3"],
-          calories: 500,
-          des: "ของกินที่อร่อยมากๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆ",
-        },
-        {
-          url: "test2.jpg",
-          ingre: ["ingre1", "ingre2"],
-          calories: 1000,
-          des: "ของกินที่อร่อยมากๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆ",
-        },
-        {
-          url: "test3.jpg",
-          ingre: ["ingre1"],
-          calories: 400,
-          des: "ของกินที่อร่อยมากๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆๆ",
-        },
-      ],
+      savedParams: []
     };
   },
   mounted() {
@@ -140,12 +121,12 @@ export default {
     let queryParams = paramsArray.filter(
       (item) => item != "null" && item != "อะไรก็ได้"
     );
-
+    this.savedParams = queryParams
     this.getData(queryParams);
   },
   methods: {
     async getData(array) {
-      let response = await axios.post("http://localhost:8080/randomMenu", {
+      let response = await axios.post("https://us-central1-sdtp-81222.cloudfunctions.net/example/randomMenu", {
         tags: array,
       });
       this.result = response.data.menu;
