@@ -2,9 +2,22 @@ const admin = require("../admin");
 const db = admin.firestore();
 const express = require('express');
 const exampleController = express();
-var cors = require('cors')
+const cors = require('cors')
 
-exampleController.use(cors({ origin: "*" }))
+// Allow list
+var allowedOrigins = ['http://localhost:8080', 'https://sdtp-81222.web.app/'];
+
+// limiting Access
+exampleController.use(cors({
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            return callback(null, true);
+        } else {
+            let msg = 'The CORS policy for this site does not ' + 'allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+    }
+}));
 
 //Variables
 const PORT = 3000
@@ -19,8 +32,8 @@ exampleController.use(express.json())
 
 exampleController.get("/", (req, res) => {
     res.status(200).send({
-        'CODE' : "OK",
-        'MSG' : "Hello World"
+        'CODE': "OK",
+        'MSG': "Hello World"
     })
 })
 
@@ -30,8 +43,8 @@ exampleController.get("/create", async (req, res) => {
 
     if (status) {
         res.status(200).send({
-            'CODE' : "OK",
-            'MSG' : "doc create!"
+            'CODE': "OK",
+            'MSG': "doc create!"
         })
     }
 })
