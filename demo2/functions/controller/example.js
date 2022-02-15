@@ -5,7 +5,7 @@ const exampleController = express();
 const cors = require('cors')
 
 // Allow list
-var allowedOrigins = ['http://localhost:8080', 'https://sdtp-81222.web.app/'];
+var allowedOrigins = ['http://localhost:8080', 'https://sdtp-81222.web.app'];
 
 // limiting Access
 exampleController.use(cors({
