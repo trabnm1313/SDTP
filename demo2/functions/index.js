@@ -1,6 +1,6 @@
 const functions = require("firebase-functions");
 
 // register controller
-const exampleController = require('./controller/example')
+const appController = require('./controller/app')
 
-exports.example = functions.https.onRequest(exampleController);
+exports.app = functions.https.onRequest(appController);
