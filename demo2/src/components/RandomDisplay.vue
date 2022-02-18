@@ -92,7 +92,7 @@
         </div>
         <div id="modal-button-layout" class="level-item">
           <a @click="alert()">
-            <div id="button" class="button level-item" >สั่งซื้อ</div>
+            <div id="button" class="button level-item">สั่งซื้อ</div>
           </a>
         </div>
       </section>
@@ -112,7 +112,7 @@ export default {
       selected: 0,
       toggle: false,
       result: [],
-      savedParams: []
+      savedParams: [],
     };
   },
   mounted() {
@@ -121,21 +121,24 @@ export default {
     let queryParams = paramsArray.filter(
       (item) => item != "null" && item != "อะไรก็ได้"
     );
-    this.savedParams = queryParams
+    this.savedParams = queryParams;
     this.getData(queryParams);
   },
   methods: {
     async getData(array) {
-      let response = await axios.post("https://us-central1-sdtp-81222.cloudfunctions.net/example/randomMenu", {
-        tags: array,
-      });
+      let response = await axios.post(
+        "https://us-central1-sdtp-81222.cloudfunctions.net/app/randomMenu",
+        {
+          tags: array,
+        }
+      );
       this.result = response.data.menu;
     },
     toHome() {
-      this.$router.go(-2)
+      this.$router.go(-2);
     },
     alert() {
-      alert("ยังไม่พร้อมใช้งาน")
+      alert("ยังไม่พร้อมใช้งาน");
     },
     setToggleOn(index) {
       this.selected = index;
