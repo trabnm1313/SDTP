@@ -20,6 +20,11 @@ router.post("/", (req, res) => {
                 tempDataList.push(menu.data())
             })
 
+            tempDataList = tempDataList.filter(menu => {
+                if( tags.every(tag => menu["tags"].includes(tag )) ) return true
+                return false
+            })
+
             let randomMenu = []
             let randomNumber = 0
             let maxRandomNumber = tempDataList.length >= 3 ? 3 : tempDataList.length
