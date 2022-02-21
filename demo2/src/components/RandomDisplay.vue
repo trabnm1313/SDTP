@@ -15,7 +15,16 @@
           <h1 class="title">Random Food</h1>
         </div>
       </div>
-      <div id="list-card" class="columns mb-0">
+      <div
+        v-if="this.result.length === 0 && this.getStatus === true"
+        id="list-card"
+        class="columns is-centered mb-0"
+      >
+        <h1 style="color: white" class="title p-5">
+          ไม่มีผลลัพธ์ที่ตรงกับความต้องการ
+        </h1>
+      </div>
+      <div v-else id="list-card" class="columns is-centered mb-0">
         <div
           v-for="(item, index) in result"
           :key="index"
@@ -37,68 +46,67 @@
         </a>
       </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div v-if="toggle === true" class="modal" :class="{ 'is-active': toggle }">
-    <div class="modal-background" @click="setToggleOff()"></div>
-    <div class="modal-card">
-      <section
-        style="border-radius: 40px 40px 0px 0px"
-        class="level-item modal-card-body"
-      >
-        <div id="modal-head" class="p-3">
-          <h1 class="title">{{ result[selected].name }}</h1>
-        </div>
-      </section>
-      <section class="level-item modal-card-body pb-0">
-        <div class="columns mb-0">
-          <div id="modal-picture-clover" class="p-4">
-            <img id="modal-pic" :src="result[selected].imageURL" alt="pic1" />
+    <!-- Modal -->
+    <div v-if="toggle === true" class="modal" :class="{ 'is-active': toggle }">
+      <div class="modal-background" @click="setToggleOff()"></div>
+      <div class="modal-card">
+        <section
+          style="border-radius: 40px 40px 0px 0px"
+          class="level-item modal-card-body"
+        >
+          <div id="modal-head" class="p-3">
+            <h1 class="title">{{ result[selected].name }}</h1>
           </div>
-        </div>
-      </section>
-      <section class="level-item modal-card-body pb-0">
-        <div id="modal-desciption" class="p-3">
-          <p
-            id="food-desciption"
-            class="ml-6"
-            style="font-size: 20px; text-align: left"
-          >
-            <b>ส่วนประกอบ</b>: {{ result[selected].recipe.Ingredient[0] }}
-            {{ result[selected].recipe.Ingredient[1] }}
-            {{ result[selected].recipe.Ingredient[2] }}
-          </p>
-          <p class="ml-6" style="font-size: 20px; text-align: left">
-            <b>แคลอรี่</b>: {{ result[selected].calorie }} กิโลแคล
-          </p>
-          <p
-            id="food-desciption"
-            class="ml-6"
-            style="text-align: left; font-size: 20px"
-          >
-            <b>รายละเอียด</b>: {{ result[selected].description }}
-          </p>
-        </div>
-      </section>
-      <section
-        style="border-radius: 0px 0px 40px 40px"
-        class="level-item modal-card-footer"
-      >
-        <div id="modal-button-layout" class="level-item m-2">
-          <a @click="alert()">
-            <div id="button" class="button level-item">วิธีทำ</div>
-          </a>
-        </div>
-        <div id="modal-button-layout" class="level-item">
-          <a @click="alert()">
-            <div id="button" class="button level-item">สั่งซื้อ</div>
-          </a>
-        </div>
-      </section>
+        </section>
+        <section class="level-item modal-card-body pb-0">
+          <div class="columns mb-0">
+            <div id="modal-picture-clover" class="p-4">
+              <img id="modal-pic" :src="result[selected].imageURL" alt="pic1" />
+            </div>
+          </div>
+        </section>
+        <section class="level-item modal-card-body pb-0">
+          <div id="modal-desciption" class="p-3">
+            <p
+              id="food-desciption"
+              class="ml-6"
+              style="font-size: 20px; text-align: left"
+            >
+              <b>ส่วนประกอบ</b>: {{ result[selected].recipe.Ingredient[0] }}
+              {{ result[selected].recipe.Ingredient[1] }}
+              {{ result[selected].recipe.Ingredient[2] }}
+            </p>
+            <p class="ml-6" style="font-size: 20px; text-align: left">
+              <b>แคลอรี่</b>: {{ result[selected].calorie }} กิโลแคล
+            </p>
+            <p
+              id="food-desciption"
+              class="ml-6"
+              style="text-align: left; font-size: 20px"
+            >
+              <b>รายละเอียด</b>: {{ result[selected].description }}
+            </p>
+          </div>
+        </section>
+        <section
+          style="border-radius: 0px 0px 40px 40px"
+          class="level-item modal-card-footer"
+        >
+          <div id="modal-button-layout" class="level-item m-2">
+            <a @click="alert()">
+              <div id="button" class="button level-item">วิธีทำ</div>
+            </a>
+          </div>
+          <div id="modal-button-layout" class="level-item">
+            <a @click="alert()">
+              <div id="button" class="button level-item">สั่งซื้อ</div>
+            </a>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
-  <!-- Modal -->
 </template>
 
 
@@ -113,6 +121,7 @@ export default {
       toggle: false,
       result: [],
       savedParams: [],
+      getStatus: false,
     };
   },
   mounted() {
@@ -132,6 +141,7 @@ export default {
           tags: array,
         }
       );
+      this.getStatus = true;
       this.result = response.data.menu;
     },
     toHome() {
@@ -194,6 +204,7 @@ section {
 #food-card {
   background-color: white;
   border-radius: 20px;
+  max-width: 500px;
 }
 
 #random-button {
