@@ -12,6 +12,13 @@ router.post("/", (req, res) => {
 
     const tags = req.body["tags"]
 
+    if(req.body.tags == undefined){
+        res.status(400).json({
+            status: 400,
+            err: "Missing tags parameter."
+        })
+    }
+
     if(tags.length != 0){
 
         menuRef.where("tags", "array-contains-any", tags).get().then(querySnapshot => {
