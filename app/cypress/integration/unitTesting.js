@@ -150,15 +150,106 @@ describe('FilterMenu Unit', () => {
     })
 })
 
-// describe('randomMenu Unit', () => {
-//     it('successfully loads', () => {
-//         cy.visit('/randomdisplay')
-//         cy.intercept(
-//             {
-//                 method: 'POST', // Route all GET requests
-//                 url: '/randomdisplay/', // that have a URL that matches '/users/*'
-//             },
-//             [] // and force the response to be: []
-//         ).as('getUsers') // and assign an alias
-//     })
-// })
+describe('randomMenu Unit', () => {
+    const data = [
+        {
+            'calorie': 500,
+            'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+            'imageURL': "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
+            'name': "ข้าวกะเพรากุ้งไข่ระเบิด",
+            'recipe': {
+                'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            },
+        },
+        {
+            'calorie': 200,
+            'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+            'imageURL': "https://img.wongnai.com/p/1600x0/2017/09/12/172aa09bdd2741368ebb85cad91f3d4e.jpg",
+            'name': "ข้าวกะเพรากุ้งไข่ระเบิด2",
+            'recipe': {
+                'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            },
+        },
+        {
+            'calorie': 404,
+            'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+            'imageURL': "https://img.wongnai.com/p/400x0/2018/05/25/12275783e777493092189fdc504534c4.jpg",
+            'name': "ข้าวกะเพรากุ้งไข่ระเบิด3",
+            'recipe': {
+                'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            },
+        }
+    ]
+
+    const data2 = [
+        {
+            'calorie': 200,
+            'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+            'imageURL': "https://img.wongnai.com/p/1600x0/2017/09/12/172aa09bdd2741368ebb85cad91f3d4e.jpg",
+            'name': "ข้าวกะเพรากุ้งไข่ระเบิด2",
+            'recipe': {
+                'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            },
+        },
+    ]
+
+    beforeEach(() => {
+        cy.visit('http://localhost:8080/randomdisplay/%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3%E0%B8%81%E0%B9%87%E0%B9%84%E0%B8%94%E0%B9%89&%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3%E0%B8%81%E0%B9%87%E0%B9%84%E0%B8%94%E0%B9%89&%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3%E0%B8%81%E0%B9%87%E0%B9%84%E0%B8%94%E0%B9%89&%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3%E0%B8%81%E0%B9%87%E0%B9%84%E0%B8%94%E0%B9%89')
+        cy.intercept({
+            method: 'POST',
+            url: '/app/randomMenu',
+        }, { menu: data }
+        ).as('getData')
+    })
+
+    it('successfully loads', () => {
+        cy.wait('@getData')
+        cy.get('#logo').should('exist')
+        cy.get('#list-card').children().should('not.have.length', 0)
+        cy.get('#random-button').should('exist')
+    })
+
+    it('can pop up', () => {
+        cy.wait('@getData')
+        cy.get('#list-card > :nth-child(1)').click()
+        cy.get('.modal-card').should('be.visible')
+        cy.get('#modal-head > .title').should('have.text', 'ข้าวกะเพรากุ้งไข่ระเบิด')
+        cy.contains('วิธีทำ').should('exist')
+        cy.contains('สั่งซื้อ').should('exist')
+        cy.get('.modal-background').click({ force: true })
+
+        cy.get('#list-card > :nth-child(2)').click()
+        cy.get('.modal-card').should('be.visible')
+        cy.get('#modal-head > .title').should('have.text', 'ข้าวกะเพรากุ้งไข่ระเบิด2')
+        cy.contains('วิธีทำ').should('exist')
+        cy.contains('สั่งซื้อ').should('exist')
+        cy.get('.modal-background').click({ force: true })
+
+        cy.get('#list-card > :nth-child(3)').click()
+        cy.get('.modal-card').should('be.visible')
+        cy.get('#modal-head > .title').should('have.text', 'ข้าวกะเพรากุ้งไข่ระเบิด3')
+        cy.contains('วิธีทำ').should('exist')
+        cy.contains('วิธีทำ').click()
+        cy.on('window:alert', (text) => {
+            expect(text).to.contains('ยังไม่พร้อมใช้งาน');
+        });
+        cy.contains('สั่งซื้อ').should('exist')
+        cy.contains('สั่งซื้อ').click()
+        cy.on('window:alert', (text) => {
+            expect(text).to.contains('ยังไม่พร้อมใช้งาน');
+        });
+        cy.get('.modal-background').click({ force: true })
+    })
+
+    // can't test conrectly
+    // it('Home redirect', () => {
+    //     cy.intercept({
+    //         method: 'POST',
+    //         url: '/app/randomMenu',
+    //     }, { menu: data2 }
+    //     ).as('getData')
+    //     cy.wait('@getData')
+    //     cy.get('#logo').click({ multiple: true })
+    //     cy.url().should('eq', 'http://localhost:8000/')
+    // })
+})
