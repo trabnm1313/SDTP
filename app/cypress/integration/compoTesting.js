@@ -34,17 +34,5 @@ describe('Hello', () => {
 
         cy.get('#random-button').click()
         cy.wait('@getData')
-
-        // can't test conrectly
-        // it('Home redirect', () => {
-        //     cy.intercept({
-        //         method: 'POST',
-        //         url: '/app/randomMenu',
-        //     }, { menu: data2 }
-        //     ).as('getData')
-        //     cy.wait('@getData')
-        //     cy.get('#logo').click({ multiple: true })
-        //     cy.url().should('eq', 'http://localhost:8000/')
-        // })
     })
 })
