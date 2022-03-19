@@ -6,7 +6,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "unit-testing": "cypress run --spec 'cypress/integration/unitTesting.js'",
     "components-testing": "cypress run --spec 'cypress/integration/compoTesting.js'"
   },
   "dependencies": {
