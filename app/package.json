@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cy:run-copotesting": "cypress run --spec 'cypress/integration/compoTesting.js'",
-    "components-testing": "start-server-and-test serve http://localhost:8080 cy:run-copotesting"
+    "components-testing": "start-server-and-test serve http://localhost:8081 cy:run-copotesting"
   },
   "dependencies": {
     "axios": "^0.25.0",
