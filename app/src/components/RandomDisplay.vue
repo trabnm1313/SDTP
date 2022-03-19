@@ -145,7 +145,7 @@ export default {
       this.result = response.data.menu;
     },
     toHome() {
-      this.$router.go(-2);
+      this.$router.replace({ path: '/' })
     },
     alert() {
       alert("ยังไม่พร้อมใช้งาน");

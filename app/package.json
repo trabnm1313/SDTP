@@ -5,12 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "unit-testing": "cypress run --spec 'cypress/integration/unitTesting.js'",
+    "components-testing": "cypress run --spec 'cypress/integration/compoTesting.js'"
   },
   "dependencies": {
     "axios": "^0.25.0",
     "bulma": "^0.9.3",
     "core-js": "^3.6.5",
+    "cypress": "^9.5.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.12"
   },
