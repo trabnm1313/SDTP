@@ -1,6 +1,8 @@
 const supertest = require('supertest')
 const { appController, server } = require('./controller/app')
 
+const mockData = require("./mockMenu.json")
+
 describe("RandomMenuAPI", () => {
     it("POST /randomMenu with []", () => {
         return supertest(appController).post("/randomMenu").send({
@@ -27,7 +29,15 @@ describe("RandomMenuAPI", () => {
         return supertest(appController).post("/randomMenu").send({
             tags: ["เส้น", "ผัด"]
         }).then(response => {
-            expect(response.statusCode).toBe(200)
+            expect(response.body.menu[0].tags).toEqual(expect.arrayContaining(["เส้น", "ผัด"]))
+        })
+    })
+
+    it("POST /randomMenu with tags[\"เส้น\", \"ผัด\", \"ไก่\"]", () => {
+        return supertest(appController).post("/randomMenu").send({
+            tags: ["เส้น", "ผัด", "ไก่"]
+        }).then(response => {
+            expect(response.body.menu[0].tags).toEqual(expect.arrayContaining(["เส้น", "ผัด", "ไก่"]))
         })
     })
 

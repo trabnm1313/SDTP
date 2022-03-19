@@ -7,7 +7,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "jest --detectOpenHandles"
+    "unit_test": "jest unit.test.js --detectOpenHandles",
+    "component_test": "jest component.test.js --detectOpenHandles"
   },
   "engines": {
     "node": "16"
