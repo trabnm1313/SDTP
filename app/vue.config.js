@@ -1,3 +1,6 @@
 module.exports = {
-    outputDir: "dist/"
+    outputDir: "dist/",
+    devServer: {
+        port: 8081
+    }
 }

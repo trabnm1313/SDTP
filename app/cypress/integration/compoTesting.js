@@ -1,11 +1,42 @@
+const data = [
+    {
+        'calorie': 500,
+        'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+        'imageURL': "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
+        'name': "ข้าวกะเพรากุ้งไข่ระเบิด",
+        'recipe': {
+            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+        },
+    },
+    {
+        'calorie': 200,
+        'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+        'imageURL': "https://img.wongnai.com/p/1600x0/2017/09/12/172aa09bdd2741368ebb85cad91f3d4e.jpg",
+        'name': "ข้าวกะเพรากุ้งไข่ระเบิด2",
+        'recipe': {
+            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+        },
+    },
+    {
+        'calorie': 404,
+        'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
+        'imageURL': "https://img.wongnai.com/p/400x0/2018/05/25/12275783e777493092189fdc504534c4.jpg",
+        'name': "ข้าวกะเพรากุ้งไข่ระเบิด3",
+        'recipe': {
+            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+        },
+    }
+]
+
 describe('Component Testing', () => {
     it('run through', () => {
         cy.visit('/')
         cy.server()
-        cy.route({
+        cy.intercept({
             method: 'POST',
-            url: '/app/randomMenu'
-        }).as('getData')
+            url: '/app/randomMenu',
+        }, { menu: data }
+        ).as('getData')
 
         cy.contains('สุ่มเลย!').click()
         cy.url().should('eq', 'http://localhost:8081/filtermenu')
