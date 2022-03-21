@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('Pull Code') {
             steps {
+                cleanWs()
                 git branch: 'feature/backend-jest-testing', url: 'https://github.com/trabnm1313/SDTP.git'
             }
         }
