@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+    environment{
+        SECRET_FILE = credentials('team2-secret')
+    }
+
+    stages {
+        stage('Pull Code') {
+            steps {
+                cleanWs()
+                git branch: 'feature/backend-jest-testing', url: 'https://github.com/trabnm1313/SDTP.git'
+            }
+        }
+        stage('Download Dependencies') {
+            steps {
+                dir("app/functions/"){
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Unit Test') {
+            steps {
+                dir("app/functions/"){
+                    sh 'npm run unit_test'
+                }
+            }
+        }
+        stage('Component Test') {
+            steps {
+                dir("app/functions/"){
+                    sh 'cp ${SECRET_FILE} key.json'
+                    sh 'npm run component_test'
+                    sh 'rm key.json'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy'
+            }
+        }
+        stage('E2E test') {
+            steps {
+                echo 'npm e2e_test'
+            }
+        }
+        stage('Notification') {
+            steps {
+                echo 'Everything is OK'
+            }
+        }
+    }
+}

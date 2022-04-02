@@ -6,7 +6,9 @@
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "unit_test": "jest unit.test.js --detectOpenHandles",
+    "component_test": "jest component.test.js --detectOpenHandles"
   },
   "engines": {
     "node": "16"
@@ -19,7 +21,12 @@
     "firebase-functions": "^3.18.0"
   },
   "devDependencies": {
-    "firebase-functions-test": "^0.2.0"
+    "@types/jest": "^27.4.0",
+    "@types/supertest": "^2.0.11",
+    "firebase-functions-test": "^0.2.0",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.3"
   },
   "private": true
 }

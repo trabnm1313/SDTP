@@ -5,9 +5,9 @@ const appController = express();
 const cors = require('cors')
 
 // Allow list
-var allowedOrigins = ['http://localhost:8081', 'https://sdtp-81222.web.app'];
+const allowedOrigins = ['http://localhost:8081', 'https://sdtp-81222.web.app'];
 
-// limiting Access
+// // limiting Access
 appController.use(cors({
     origin: function (origin, callback) {
         if (allowedOrigins.indexOf(origin) !== -1) {
@@ -51,4 +51,6 @@ appController.get("/create", async (req, res) => {
     }
 })
 
-module.exports = appController;
+const server = appController.listen(PORT)
+
+module.exports = { appController: appController, server: server };
