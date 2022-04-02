@@ -5,28 +5,30 @@ const appController = express();
 const cors = require('cors')
 
 // Allow list
-// var allowedOrigins = ['http://localhost:8080', 'https://sdtp-81222.web.app'];
+const allowedOrigins = ['http://localhost:8081', 'https://sdtp-81222.web.app'];
 
 // // limiting Access
-// appController.use(cors({
-//     origin: function (origin, callback) {
-//         if (allowedOrigins.indexOf(origin) !== -1) {
-//             return callback(null, true);
-//         } else {
-//             let msg = 'The CORS policy for this site does not ' + 'allow access from the specified Origin.';
-//             return callback(new Error(msg), false);
-//         }
-//     }
-// }));
+appController.use(cors({
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            return callback(null, true);
+        } else {
+            let msg = 'The CORS policy for this site does not ' + 'allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+    }
+}));
 
 //Variables
 const PORT = 3000
 
 //Routes Variables
 const randomMenuAPI = require("./randomMenuController")
+const databaseAPI = require("./databaseController")
 
 //Routes uses
 appController.use("/randomMenu", randomMenuAPI)
+appController.use("/database", databaseAPI)
 
 appController.use(express.json())
 
