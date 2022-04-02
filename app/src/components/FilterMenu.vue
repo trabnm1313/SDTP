@@ -34,7 +34,7 @@
     </div>
 
     <!-- ModalMethod -->
-    <div class="modal" :class="{'is-active':methodModal}">
+    <div id="methodModal" class="modal" :class="{'is-active':methodModal}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -73,7 +73,7 @@
     </div>
     
     <!-- ModalNoodle -->
-    <div class="modal" :class="{'is-active':noodleModal}">
+    <div id="noodleModal" class="modal" :class="{'is-active':noodleModal}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -112,7 +112,7 @@
     </div>
 
     <!-- ModalIngredient -->
-    <div class="modal" :class="{'is-active':ingredientModal}">
+    <div id="ingredientModal" class="modal" :class="{'is-active':ingredientModal}">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">

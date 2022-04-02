@@ -1,7 +1,6 @@
 {
   "projects": {
-    "default": "sdtp-81222",
-    "newInstance": "sdtp-81222"
+    "default": "sdtp-81222"
   },
   "targets": {}
 }
