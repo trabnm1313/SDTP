@@ -3,3 +3,6 @@ demo/functions/key.json
 demo2/functions/key.json
 demo2/.firebase/hosting.ZGlzdA.cache
 demo2/functions/ui-debug.log
+app/functions/ui-debug.log
+app/functions/key.json
+app/functions/firebase-debug.log

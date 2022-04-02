@@ -24,9 +24,11 @@ const PORT = 3000
 
 //Routes Variables
 const randomMenuAPI = require("./randomMenuController")
+const databaseAPI = require("./databaseController")
 
 //Routes uses
 appController.use("/randomMenu", randomMenuAPI)
+appController.use("/database", databaseAPI)
 
 appController.use(express.json())
 
@@ -48,7 +50,5 @@ appController.get("/create", async (req, res) => {
         })
     }
 })
-
-appController.listen(PORT, () => { console.log(`Server running on port ${PORT}`) })
 
 module.exports = appController;
