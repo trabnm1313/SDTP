@@ -8,16 +8,16 @@ const cors = require('cors')
 const allowedOrigins = ['http://localhost:8081', 'https://sdtp-81222.web.app'];
 
 // // limiting Access
-appController.use(cors({
-    origin: function (origin, callback) {
-        if (allowedOrigins.indexOf(origin) !== -1) {
-            return callback(null, true);
-        } else {
-            let msg = 'The CORS policy for this site does not ' + 'allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-    }
-}));
+// appController.use(cors({
+//     origin: function (origin, callback) {
+//         if (allowedOrigins.indexOf(origin) !== -1) {
+//             return callback(null, true);
+//         } else {
+//             let msg = 'The CORS policy for this site does not ' + 'allow access from the specified Origin.';
+//             return callback(new Error(msg), false);
+//         }
+//     }
+// }));
 
 //Variables
 const PORT = 3000
