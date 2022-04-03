@@ -1,8 +1,27 @@
+.DS_Store
+node_modules
+/dist
+/cypress/videos
+/cypress/screenshots
+.firebase
+key.json
+ui-debug.log
 
-demo/functions/key.json
-demo2/functions/key.json
-demo2/.firebase/hosting.ZGlzdA.cache
-demo2/functions/ui-debug.log
-app/functions/ui-debug.log
-app/functions/key.json
-app/functions/firebase-debug.log
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
