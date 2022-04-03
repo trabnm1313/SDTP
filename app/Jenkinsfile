@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/trabnm1313/SDTP.git'
+            }
+        }
+        stage('Download Dependencies') {
+            steps {
+                dir("app"){
+                    sh 'yarn install'
+                }
+            }
+        }
+        stage('Conponents Testing') {
+            steps {
+                dir("app"){
+                    sh 'yarn run components-testing'
+                }
+            }
+        }
+        stage('E2E Testing') {
+            steps {
+                echo "E2E testing mockup"
+            }
+        }
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
