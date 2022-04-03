@@ -5,7 +5,7 @@ const appController = express();
 const cors = require('cors')
 
 // Allow list
-const allowedOrigins = ['http://localhost:8081', 'https://sdtp-81222.web.app'];
+const allowedOrigins = ['http://localhost:9000', 'https://sdtp-81222.web.app'];
 
 // // limiting Access
 // appController.use(cors({
@@ -19,16 +19,18 @@ const allowedOrigins = ['http://localhost:8081', 'https://sdtp-81222.web.app'];
 //     }
 // }));
 
+// appController.use(cors("*"))
+
 //Variables
 const PORT = 3000
 
 //Routes Variables
 const randomMenuAPI = require("./randomMenuController")
-const databaseAPI = require("./databaseController")
+// const databaseAPI = require("./databaseController")
 
 //Routes uses
 appController.use("/randomMenu", randomMenuAPI)
-appController.use("/database", databaseAPI)
+// appController.use("/database", databaseAPI)
 
 appController.use(express.json())
 
