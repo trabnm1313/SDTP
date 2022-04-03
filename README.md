@@ -7,7 +7,7 @@
 ### Frontend
 * run command "yarn install" to install dependencies
 * run command "yarn build" to build vue project
-* run command "yarn run serve"
+* run command "yarn components-testing" to run component testing
   
 ### Backend
 * run command "npm install" to install dependencies
