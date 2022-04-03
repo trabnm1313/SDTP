@@ -13,21 +13,21 @@ pipeline {
         }
         stage('Download Dependencies') {
             steps {
-                dir("app/functions/"){
+                dir("backend"){
                     sh 'npm install'
                 }
             }
         }
         stage('Unit Test') {
             steps {
-                dir("app/functions/"){
+                dir("backend"){
                     sh 'npm run unit_test'
                 }
             }
         }
         stage('Component Test') {
             steps {
-                dir("app/functions/"){
+                dir("backend"){
                     sh 'cp ${SECRET_FILE} key.json'
                     sh 'npm run component_test'
                     sh 'rm key.json'

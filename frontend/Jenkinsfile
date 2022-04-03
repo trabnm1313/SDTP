@@ -9,14 +9,14 @@ pipeline {
         }
         stage('Download Dependencies') {
             steps {
-                dir("app"){
+                dir("frontend"){
                     sh 'yarn install'
                 }
             }
         }
         stage('Conponents Testing') {
             steps {
-                dir("app"){
+                dir("frontend"){
                     sh 'yarn run components-testing'
                 }
             }
