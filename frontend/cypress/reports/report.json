@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-04-08T14:31:18.401Z",
+    "end": "2022-04-08T14:31:22.798Z",
+    "duration": 4397,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8cf85cc5-dc41-411a-a08f-5a6ebd42780b",
+      "title": "",
+      "fullFile": "cypress/integration/compoTesting.js",
+      "file": "cypress/integration/compoTesting.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c3276043-3d57-4f1f-981f-f9f272748c6b",
+          "title": "Component Testing",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "run through",
+              "fullTitle": "Component Testing run through",
+              "timedOut": null,
+              "duration": 4381,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('/');\ncy.server();\ncy.intercept({\n  method: 'POST',\n  url: '/app/randomMenu'\n}, {\n  menu: data\n}).as('getData');\ncy.contains('สุ่มเลย!').click();\ncy.url().should('eq', 'http://localhost:9000/filtermenu'); // เลือกข้าว\ncy.get('.content > .form-check').within(() => {\n  cy.get('[value=\"ข้าว\"]').check();\n  cy.get('[value=\"ข้าว\"]').should('be.checked');\n});\ncy.contains('Next').click(); // เลือกต้ม\ncy.get('#methodModal > .modal-card > .modal-card-body > .form-check').within(() => {\n  cy.get('[value=\"ผัด\"]').check();\n  cy.get('[value=\"ผัด\"]').should('be.checked');\n});\ncy.get('#methodModal > .modal-card > .modal-card-foot > .is-success').click(); // เลือกหมู\ncy.get('#ingredientModal > .modal-card > .modal-card-body > .form-check').within(() => {\n  cy.get('[value=\"หมู\"]').click();\n  cy.get('[value=\"หมู\"]').should('be.checked');\n});\ncy.get('#ingredientModal > .modal-card > .modal-card-foot > .is-success').click();\ncy.wait('@getData');\ncy.url().should('eq', 'http://localhost:9000/randomdisplay/%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7&%E0%B8%9C%E0%B8%B1%E0%B8%94&null&%E0%B8%AB%E0%B8%A1%E0%B8%B9');\ncy.get('#random-button').click();\ncy.wait('@getData');",
+              "err": {},
+              "uuid": "fb687695-efd6-41b5-b171-beabafefe971",
+              "parentUUID": "c3276043-3d57-4f1f-981f-f9f272748c6b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "fb687695-efd6-41b5-b171-beabafefe971"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4381,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "reportFilename": "report",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
