@@ -136,7 +136,7 @@ export default {
   methods: {
     async getData(array) {
       let response = await axios.post(
-        "https://us-central1-sdtp-81222.cloudfunctions.net/app/randomMenu",
+        "http://159.223.45.216:3083/randomMenu",
         {
           tags: array,
         }

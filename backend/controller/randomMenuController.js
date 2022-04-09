@@ -2,9 +2,9 @@ const Express = require('express')
 const router = Express.Router()
 
 
-const admin = require("../admin")
-const db = admin.firestore()
-const menuRef = db.collection("Menu")
+//const admin = require("../admin")
+//const db = admin.firestore()
+//const menuRef = db.collection("Menu")
 
 const mockData = require("../mockMenu.json")
 
@@ -23,8 +23,8 @@ router.post("/", (req, res) => {
 
     if(tags.length != 0){
 
-        menuRef.where("tags", "array-contains-any", tags).get().then(querySnapshot => {
-            let tempDataList = []
+        //menuRef.where("tags", "array-contains-any", tags).get().then(querySnapshot => {
+            //let tempDataList = []
 
             //Get data from Firebase
             // querySnapshot.forEach(menu => {
@@ -55,17 +55,17 @@ router.post("/", (req, res) => {
                 menu: randomMenu
             })
 
-        }).catch(error => {
+        /*}).catch(error => {
             console.log(error)
             res.status(400).json({
                 message: "Something went wrong.",
                 err: error
             })
-        })
+        })*/
 
     }else{
 
-        menuRef.get().then(querySnapshot => {
+        //menuRef.get().then(querySnapshot => {
             let tempDataList = []
 
             // querySnapshot.forEach(menu => {
@@ -88,13 +88,13 @@ router.post("/", (req, res) => {
                 message: "OK",
                 menu: randomMenu
             })
-        }).catch(error => {
+        /*}).catch(error => {
             console.log(error)
             res.status(400).json({
                 message: "Something went wrong.",
                 err: error
             })
-        })
+        })*/
     }
 
 })
