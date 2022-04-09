@@ -22,7 +22,7 @@ pipeline {
             steps {
                 dir("backend"){
                     sh 'npm run unit_test'
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'backend/reports', reportFiles: 'report.html', reportName: 'HTML Report', reportTitles: ''])
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'reports', reportFiles: 'report.html', reportName: 'HTML Report', reportTitles: ''])
                 }
             }
         }
