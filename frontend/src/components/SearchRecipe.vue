@@ -5,7 +5,7 @@
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
                     <div class="navbar-item">
-                    <input class="input is-rounded searchBox" type="text" placeholder="Search">
+                    <input class="input is-rounded searchBox" type="text" placeholder="Search" v-model="search">
                     </div>
                 </div>
 
@@ -135,10 +135,11 @@
 
 <script>
 export default {
-  name: 'Recipe',
+  name: ' SearchRecipe',
   data() {
     return {
       filterModal:false,
+      search:null,
       filter:[
           {key:false,value:"ข้าว"},
           {key:false,value:"ต้ม"},
@@ -169,6 +170,9 @@ export default {
     },
     async searchMenu() {
         let tagsArray = []
+        if(this.search != null || this.search != ""){
+            tagsArray.push(this.search)
+        }
         for (let data of this.filter){ 
             if(data.key = true){
                 tagsArray.push(data.value)

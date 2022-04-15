@@ -3,7 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue";
 import FilterMenu from "../components/FilterMenu.vue";
 import RandomDisplay from "../components/RandomDisplay.vue"
-import Recipe from "../components/Recipe.vue"
+import SearchRecipe from "../components/SearchRecipe.vue"
 
 
 const routes = [
@@ -23,9 +23,9 @@ const routes = [
       component: RandomDisplay
     },
     {
-      path: "/Recipe",
-      name: "Recipe",
-      component: Recipe
+      path: "/SearchRecipe",
+      name: "SearchRecipe",
+      component: SearchRecipe
     }
 
 ];

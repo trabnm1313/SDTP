@@ -39,7 +39,7 @@ export default {
       this.$router.push('/filtermenu')
     },
     goRecipe(){
-      this.$router.push('/Recipe')
+      this.$router.push('/SearchRecipe')
     },
     alert() {
       alert("ยังไม่พร้อมใช้งาน")
