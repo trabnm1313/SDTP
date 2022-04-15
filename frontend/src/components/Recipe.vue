@@ -1,4 +1,3 @@
-
 <template>
 <section>
     <nav class="navbar is-dark">
@@ -23,6 +22,31 @@
         </div>
     </nav>
 
+    <div class="body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>สูตรอาหาร</th>
+                    <th>ภาพประกอบ</th>
+                    <th>จำนวนการดู(ครั้ง)</th>
+                    <th>วัตถุดิบที่ใช้</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(menu, index) in result" :key="index" >
+                    <td>{{menu.recipe}}</td>
+                    <td><img class="img" :src="menu.imageURL" alt="menuImage"/></td>
+                    <td>{{ menu.viwe }}</td>
+                    <td>
+                        {{ result.recipe.Ingredient[0] }},
+                        {{ result.recipe.Ingredient[1] }},
+                        {{ result.recipe.Ingredient[2] }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div id="filterModal" class="modal" :class="{'is-active':filterModal}">
         <div class="modal-card">
             <header class="modal-card-head">
@@ -36,40 +60,40 @@
                         <div>
                             <h1>ประเภทเมนู</h1>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="rice"> ข้าว
+                                <input type="checkbox" v-model="filter[0].key"> ข้าว
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="noodle"> เส้น
+                                <input type="checkbox" v-model="filter[5].key"> เส้น
                             </label>
                         </div>
-                        <div v-show="rice">
+                        <div v-show="filter[0].key">
                             <h1>ประเภทการทำ(เมนูข้าว)</h1>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="tom"> ต้ม
+                                <input type="checkbox" v-model="filter[1].key"> ต้ม
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="pad"> ผัด
+                                <input type="checkbox" v-model="filter[2].key"> ผัด
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="kang"> แกง
+                                <input type="checkbox" v-model="filter[3].key"> แกง
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="tod"> ทอด
+                                <input type="checkbox" v-model="filter[4].key"> ทอด
                             </label>
                         </div>
-                        <div v-show="noodle">
+                        <div v-show="filter[5].key">
                             <h1>เส้น(เมนูเส้น)</h1>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="raman"> ราเมง
+                                <input type="checkbox" v-model="filter[6].key"> ราเมง
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="udon"> อุด้ง
+                                <input type="checkbox" v-model="filter[7].key"> อุด้ง
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="lek"> เส้นเล็ก
+                                <input type="checkbox" v-model="filter[8].key"> เส้นเล็ก
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="yai"> เส้นใหญ่
+                                <input type="checkbox" v-model="filter[9].key"> เส้นใหญ่
                             </label>
                         </div>
                         
@@ -78,16 +102,16 @@
                         <div>
                             <h1>วัตถุดิบหลัก</h1>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="moo"> หมู
+                                <input type="checkbox" v-model="filter[10].key"> หมู
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="deef"> เนื้อ
+                                <input type="checkbox" v-model="filter[11].key"> เนื้อ
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="kai"> ไก่
+                                <input type="checkbox" v-model="filter[12].key"> ไก่
                             </label>
                             <label class="checkbox">
-                                <input type="checkbox" v-model="taley"> ทะเล
+                                <input type="checkbox" v-model="filter[13].key"> ทะเล
                             </label>
                         </div>
                         <div>
@@ -102,7 +126,7 @@
             </section>
             <footer class="modal-card-foot">
             <button class="button is-success" @click="filterModal = !filterModal">Select</button>
-            <button class="button" @click="cancel">Cancel</button>
+            <button class="button is-danger" @click="cancel()">Cancel</button>
             </footer>
         </div>
     </div>
@@ -115,44 +139,53 @@ export default {
   data() {
     return {
       filterModal:false,
-      rice:false,
-      tom:false,
-      pad:false,
-      kang:false,
-      tod:false,
-      noodle:false,
-      raman:false,
-      udon:false,
-      lek:false,
-      yai:false,
-      moo:false,
-      deef:false,
-      kai:false,
-      taley:false,
+      filter:[
+          {key:false,value:"ข้าว"},
+          {key:false,value:"ต้ม"},
+          {key:false,value:"ผัด"},
+          {key:false,value:"แกง"},
+          {key:false,value:"ทอด"},
+          {key:false,value:"เส้น"},
+          {key:false,value:"ราเมง"},
+          {key:false,value:"อูด้ง"},
+          {key:false,value:"เส้นเล็ก"},
+          {key:false,value:"เส้นใหญ่"},
+          {key:false,value:"หมู"},
+          {key:false,value:"เนื้อ"},
+          {key:false,value:"ไก่"},
+          {key:false,value:"ทะเล"},
+      ],    
       more:null,
+      result: [],
+      searchStatus: false,
     };
   },
   methods: {
-    search() {
-    },
     cancel(){
-        this.filterModal = false,
-        this.rice = false,
-        this.tom = false,
-        this.pad = false,
-        this.kang = false,
-        this.tod = false,
-        this.noodle = false,
-        this.raman = false,
-        this.udon = false,
-        this.lek = false,
-        this.yai = false,
-        this.moo = false,
-        this.deef = false,
-        this.kai = false,
-        this.taley = false,
-        this.more = null
-    }
+        for (let data of this.filter){ 
+            data.key = false;
+        }
+        this.filterModal = false;
+    },
+    async searchMenu() {
+        let tagsArray = []
+        for (let data of this.filter){ 
+            if(data.key = true){
+                tagsArray.push(data.value)
+            }
+        }
+        if(this.more != null || this.more != ""){
+            tagsArray.push(this.more)
+        }
+        let response = await axios.post(
+          "http://159.223.45.216:3083/searchMenu",
+          {
+            tags: tagsArray,
+          }
+        );
+        this.searchStatus = true;
+        this.result = response.data.menu;
+    },
   }
 }
 </script>
@@ -175,5 +208,15 @@ h1 {
 }
 .checkbox{
     margin:5px
+}
+.body{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.table{
+    width: 100%;
+}
+th{
+    width: 25%;
 }
 </style>
