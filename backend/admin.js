@@ -1,7 +1,7 @@
-//const admin = require("firebase-admin");
+const admin = require("firebase-admin");
 
-//const serviceAccount = require("./key.json");
+const serviceAccount = require("./key.json");
 
-//admin.initializeApp();
+admin.initializeApp();
 
-//module.exports = admin;
+module.exports = admin;
