@@ -38,13 +38,13 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                withCredentials([string(credentialsId: 'team2-backend-docker', variable: 'team2-ssh-password')]) {
+                withCredentials([string(credentialsId: 'team2-backend-docker', variable: 'team2sshPass')]) {
                     script {
                         def remote = [:]
                         remote.host = '159.223.45.216'
                         remote.name = 'team2-ssh'
                         remote.user = 'root'
-                        remote.password = "${team2-ssh-password}"
+                        remote.password = "${team2sshPass}"
                         remote.allowAnyHosts = true
 
                         sshCommand remote: remote, command: "git clone https://github.com/trabnm1313/SDTP.git"
