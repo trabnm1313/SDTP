@@ -1,11 +1,12 @@
-const data = [
+const randomData = [
     {
         'calorie': 500,
         'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
         'imageURL': "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
         'name': "ข้าวกะเพรากุ้งไข่ระเบิด",
         'recipe': {
-            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
+            'views' : 1
         },
     },
     {
@@ -14,7 +15,8 @@ const data = [
         'imageURL': "https://img.wongnai.com/p/1600x0/2017/09/12/172aa09bdd2741368ebb85cad91f3d4e.jpg",
         'name': "ข้าวกะเพรากุ้งไข่ระเบิด2",
         'recipe': {
-            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
+            'views' : 10
         },
     },
     {
@@ -23,19 +25,20 @@ const data = [
         'imageURL': "https://img.wongnai.com/p/400x0/2018/05/25/12275783e777493092189fdc504534c4.jpg",
         'name': "ข้าวกะเพรากุ้งไข่ระเบิด3",
         'recipe': {
-            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"]
+            'Ingredient': ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
+            'views' : 100
         },
     }
 ]
 
 describe('Component Testing', () => {
-    it('run through', () => {
+    it('feature random menu', () => {
         cy.visit('/')
         cy.server()
         cy.intercept({
             method: 'POST',
-            url: '/app/randomMenu',
-        }, { menu: data }
+            url: 'http://159.223.45.216:3083/randomMenu',
+        }, { menu: randomData }
         ).as('getData')
 
         cy.contains('สุ่มเลย!').click()
@@ -65,5 +68,41 @@ describe('Component Testing', () => {
 
         cy.get('#random-button').click()
         cy.wait('@getData')
+    })
+
+    it('feature recipe', () => {
+        cy.visit('/')
+        cy.server()
+        cy.intercept({
+            method: 'POST',
+            url: 'http://159.223.45.216:3083/searchMenu',
+        }, { menu: randomData }
+        ).as('getData')
+        cy.contains('ลองทำเอง').click()
+        cy.url().should('eq', 'http://localhost:9000/Recipe')
+        cy.get('.navbar-item > .input').type("Hello")
+        cy.get(':nth-child(2) > .button').click()
+        cy.wait('@getData')
+        cy.get('tbody').contains('ข้าวกะเพรากุ้งไข่ระเบิด')
+        cy.get('tbody').contains('ข้าวกะเพรากุ้งไข่ระเบิด2')
+        cy.get('tbody').contains('ข้าวกะเพรากุ้งไข่ระเบิด3')
+        cy.get(':nth-child(1) > .button').click()
+        cy.get('.modal').should('have.class', 'is-active')
+        cy.get('.columns > :nth-child(1) > :nth-child(1)').contains('ข้าว')
+        cy.get('.columns > :nth-child(1) > :nth-child(1)').contains('เส้น')
+        cy.get('.columns > :nth-child(1) > :nth-child(2) > :nth-child(2)').click()
+        cy.get('.columns > :nth-child(1) > :nth-child(3) > :nth-child(2)').click()
+        cy.get('.columns > :nth-child(1) > :nth-child(1) > :nth-child(2)').click()
+        cy.get('.columns > :nth-child(1)').contains("ประเภทการทำ(เมนูข้าว)").and('not.be.visible')
+        cy.get('.columns > :nth-child(1) > :nth-child(1) > :nth-child(3)').click()
+        cy.get('.columns > :nth-child(1)').contains("เส้น(เมนูเส้น)").and('not.be.visible')
+        cy.get('.columns > :nth-child(2) > :nth-child(1)').contains('วัตถุดิบหลัก')
+        cy.get('.columns > :nth-child(2) > :nth-child(1) > :nth-child(2)').click()
+        cy.get(':nth-child(2) > .input').type("hello")
+        cy.get('.modal-card-foot > .is-success').click()
+        cy.get('.modal').should('not.have.class', 'is-active')
+        cy.get(':nth-child(1) > .button').click()
+        cy.get('.is-danger').click()
+        cy.get('.modal').should('not.have.class', 'is-active')
     })
 })

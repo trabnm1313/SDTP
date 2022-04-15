@@ -14,7 +14,7 @@
                         <button class="button is-link" @click="filterModal = !filterModal">Filter</button>
                     </div>
                     <div class="navbar-item">
-                        <button class="button is-success">Search</button>
+                        <button class="button is-success" @click="searchMenu()">Search</button>
                     </div>
                 </div>
 
@@ -34,13 +34,13 @@
             </thead>
             <tbody>
                 <tr v-for="(menu, index) in result" :key="index" >
-                    <td>{{menu.recipe}}</td>
+                    <td>{{menu.name}}</td>
                     <td><img class="img" :src="menu.imageURL" alt="menuImage"/></td>
-                    <td>{{ menu.viwe }}</td>
+                    <td>{{ menu.recipe.views }}</td>
                     <td>
-                        {{ result.recipe.Ingredient[0] }},
-                        {{ result.recipe.Ingredient[1] }},
-                        {{ result.recipe.Ingredient[2] }}
+                        {{ menu.recipe.Ingredient[0] }},
+                        {{ menu.recipe.Ingredient[1] }},
+                        {{ menu.recipe.Ingredient[2] }}
                     </td>
                 </tr>
             </tbody>
@@ -134,6 +134,8 @@
 </template>
 
 <script>
+const axios = require("axios");
+
 export default {
   name: 'Recipe',
   data() {
