@@ -1,5 +1,5 @@
-const admin = require("../admin");
-const db = admin.firestore();
+// const admin = require("../admin");
+// const db = admin.firestore();
 const express = require('express');
 const appController = express();
 const cors = require('cors')
