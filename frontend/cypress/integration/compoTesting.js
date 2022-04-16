@@ -1,5 +1,6 @@
 const randomData = [
     {
+        'id': '1',
         'calorie': 500,
         'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
         'imageURL': "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
@@ -10,6 +11,7 @@ const randomData = [
         },
     },
     {
+        'id': '2',
         'calorie': 200,
         'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
         'imageURL': "https://img.wongnai.com/p/1600x0/2017/09/12/172aa09bdd2741368ebb85cad91f3d4e.jpg",
@@ -20,6 +22,7 @@ const randomData = [
         },
     },
     {
+        'id': '3',
         'calorie': 404,
         'description': "ข้าวกะเพรากุ้งไข่ระเบิด",
         'imageURL': "https://img.wongnai.com/p/400x0/2018/05/25/12275783e777493092189fdc504534c4.jpg",
@@ -30,6 +33,26 @@ const randomData = [
         },
     }
 ]
+
+const detail = {
+    id: "1",
+    calorie: 500,
+    description: "ข้าวกะเพรากุ้งไข่ระเบิด",
+    imageURL:
+      "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
+    name: "ข้าวกะเพรากุ้งไข่ระเบิด",
+    recipe: {
+      ingredient: ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
+      steps: [
+        "นำมะระมาผ่าแล้วควักไส้ทิ้ง หั่นเป็นชิ้น ๆ แล้วทาด้วยเกลือให้ทั่ว หมักเกลือทิ้งไว้ 20 นาที",
+        "เมื่อครบเวลาแล้ว นำไปล้างน้ำเปล่า เกลือจะช่วยลดความขมของมะระ",
+        "ต้มน้ำให้เดือด ใส่รากผักชี กระเทียม พริกไทยดำ ตามด้วยเครื่องปรุงทั้งหมด และน่องไก่ ตุ๋นทิ้งไว้เป็นเวลา 30 นาที",
+        "เมื่อครบเวลา ใส่มะระ และเห็ดหอมแช่น้ำลงไป ตุ๋นต่ออีก 30 นาที",
+        "ลวกถั่วงอก และเส้นบะหมี่ ใส่ลงในชาม ตักไก่ และมะระที่ตุ๋นไว้ ราดจัดเสิร์ฟ โรยหน้าด้วย กระเทียมเจียว และผักชีต้นหอม เป็นอันพร้อมรับประทาน!",
+      ],
+      views: 1,
+    },
+  };
 
 describe('Component Testing', () => {
     it('feature random menu', () => {
@@ -78,8 +101,15 @@ describe('Component Testing', () => {
             url: 'http://159.223.45.216:3083/searchMenu',
         }, { menu: randomData }
         ).as('getData')
+
+        cy.intercept({
+            method: 'GET',
+            url: 'http://159.223.45.216:3083/database/1',
+        }, { menu: detail }
+        ).as('getDetail')
+
         cy.contains('ลองทำเอง').click()
-        cy.url().should('eq', 'http://localhost:9000/Recipe')
+        cy.url().should('eq', 'http://localhost:9000/SearchRecipe')
         cy.get('.navbar-item > .input').type("Hello")
         cy.get(':nth-child(2) > .button').click()
         cy.wait('@getData')
@@ -104,5 +134,14 @@ describe('Component Testing', () => {
         cy.get(':nth-child(1) > .button').click()
         cy.get('.is-danger').click()
         cy.get('.modal').should('not.have.class', 'is-active')
+
+        cy.get(':nth-child(1) > a > td').click()
+        cy.wait('@getDetail')
+        cy.url().should('eq', 'http://localhost:9000/DetailRecipe/1')
+        cy.contains("ข้าวกะเพรากุ้งไข่ระเบิด")
+        cy.get(':nth-child(2) > .column > .content > ol').children().should('have.length', 2)
+        cy.get(':nth-child(3) > .column > .content > ol').children().should('have.length', 5)
+        cy.get('.button').click()
+        cy.url().should('eq', 'http://localhost:9000/SearchRecipe')
     })
 })

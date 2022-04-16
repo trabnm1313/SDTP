@@ -56,25 +56,7 @@
 </template>
 
 <script>
-const mock = {
-  id: "1",
-  calorie: 500,
-  description: "ข้าวกะเพรากุ้งไข่ระเบิด",
-  imageURL:
-    "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
-  name: "ข้าวกะเพรากุ้งไข่ระเบิด",
-  recipe: {
-    ingredient: ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
-    steps: [
-      "นำมะระมาผ่าแล้วควักไส้ทิ้ง หั่นเป็นชิ้น ๆ แล้วทาด้วยเกลือให้ทั่ว หมักเกลือทิ้งไว้ 20 นาที",
-      "เมื่อครบเวลาแล้ว นำไปล้างน้ำเปล่า เกลือจะช่วยลดความขมของมะระ",
-      "ต้มน้ำให้เดือด ใส่รากผักชี กระเทียม พริกไทยดำ ตามด้วยเครื่องปรุงทั้งหมด และน่องไก่ ตุ๋นทิ้งไว้เป็นเวลา 30 นาที",
-      "เมื่อครบเวลา ใส่มะระ และเห็ดหอมแช่น้ำลงไป ตุ๋นต่ออีก 30 นาที",
-      "ลวกถั่วงอก และเส้นบะหมี่ ใส่ลงในชาม ตักไก่ และมะระที่ตุ๋นไว้ ราดจัดเสิร์ฟ โรยหน้าด้วย กระเทียมเจียว และผักชีต้นหอม เป็นอันพร้อมรับประทาน!",
-    ],
-    views: 1,
-  },
-};
+const axios = require("axios");
 
 export default {
   name: "DetailRecipe",
@@ -94,14 +76,14 @@ export default {
     goRecipe() {
       this.$router.back();
     },
-    getData() {
+    async getData() {
       let id = this.$route.params.id;
-      // let response = await axios.get("http://159.223.45.216:3083/database/" + props.id);
-      // this.result = response.data.menu;
-      this.name = mock.name;
-      this.ingredient = mock.recipe.ingredient;
-      this.steps = mock.recipe.steps;
-      this.imageURL = mock.imageURL;
+      let response = await axios.get("http://159.223.45.216:3083/database/" + id);
+      this.result = response.data.menu;
+      this.name = response.data.menu.name;
+      this.ingredient = response.data.menu.recipe.ingredient;
+      this.steps = response.data.menu.recipe.steps;
+      this.imageURL = response.data.menu.imageURL;
       this.id = id;
     },
   },

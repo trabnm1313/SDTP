@@ -238,15 +238,15 @@ export default {
       if (this.more != null || this.more != "") {
         tagsArray.push(this.more);
       }
-      // let response = await axios.post(
-      //   "http://159.223.45.216:3083/searchMenu",
-      //   {
-      //     tags: tagsArray,
-      //   }
-      // );
+      let response = await axios.post(
+        "http://159.223.45.216:3083/searchMenu",
+        {
+          tags: tagsArray,
+        }
+      );
       this.searchStatus = true;
-      // this.result = response.data.menu;
-      this.result = randomData;
+      this.result = response.data.menu;
+      // this.result = randomData;
     },
     viewDetail(id) {
       this.$router.push("/DetailRecipe/" + id);
