@@ -49,7 +49,7 @@
               ><td>{{ menu.name }}</td></a
             >
             <td><img class="img" :src="menu.imageURL" alt="menuImage" /></td>
-            <td>{{ menu.recipe.views }}</td>
+            <td>{{ menu.views }}</td>
             <td>
               {{ menu.recipe.Ingredient[0] }}, {{ menu.recipe.Ingredient[1] }},
               {{ menu.recipe.Ingredient[2] }}
@@ -152,44 +152,6 @@
 
 <script>
 const axios = require("axios");
-const randomData = [
-  {
-    id: "1",
-    calorie: 500,
-    description: "ข้าวกะเพรากุ้งไข่ระเบิด",
-    imageURL:
-      "https://img.wongnai.com/p/800x0/2019/04/02/2dc203b9dafe47fc9c532142419513aa.jpg",
-    name: "ข้าวกะเพรากุ้งไข่ระเบิด",
-    recipe: {
-      Ingredient: ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
-      views: 1,
-    },
-  },
-  {
-    id: "2",
-    calorie: 200,
-    description: "ข้าวกะเพรากุ้งไข่ระเบิด",
-    imageURL:
-      "https://img.wongnai.com/p/1600x0/2017/09/12/172aa09bdd2741368ebb85cad91f3d4e.jpg",
-    name: "ข้าวกะเพรากุ้งไข่ระเบิด2",
-    recipe: {
-      Ingredient: ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
-      views: 10,
-    },
-  },
-  {
-    id: "3",
-    calorie: 404,
-    description: "ข้าวกะเพรากุ้งไข่ระเบิด",
-    imageURL:
-      "https://img.wongnai.com/p/400x0/2018/05/25/12275783e777493092189fdc504534c4.jpg",
-    name: "ข้าวกะเพรากุ้งไข่ระเบิด3",
-    recipe: {
-      Ingredient: ["ไข่ไก่ 3 ฟอง", "ไข่ไก่ 10 ฟอง"],
-      views: 100,
-    },
-  },
-];
 
 export default {
   name: " SearchRecipe",
@@ -238,12 +200,13 @@ export default {
       if (this.more != null || this.more != "") {
         tagsArray.push(this.more);
       }
-      let response = await axios.post(
-        "http://159.223.45.216:3083/searchMenu",
-        {
-          tags: tagsArray,
-        }
-      );
+      let response = await axios.get("http://159.223.45.216:3083/searchMenu", {
+        params: { name: this.search },
+      });
+      // let response = await axios.get("http://localhost:3083/searchMenu", {
+      //   params: { name: this.search },
+      // });
+
       this.searchStatus = true;
       this.result = response.data.menu;
       // this.result = randomData;

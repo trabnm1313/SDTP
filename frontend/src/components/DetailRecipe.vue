@@ -21,10 +21,10 @@
               <h2 class="title is-2">{{ this.name }}</h2>
               <div class="box has-background-grey-lighter">
                 <h4 class="title is-4">ส่วนผสม</h4>
-                <div class="column is-6">
+                <div class="column">
                   <div class="content is-size-5">
                     <ol type="1">
-                      <li v-for="(item, index) in this.ingredient" :key="index">
+                      <li class="p-1" style="text-align: left;" v-for="(item, index) in this.ingredient" :key="index">
                         {{ item }}
                       </li>
                     </ol>
@@ -78,12 +78,15 @@ export default {
     },
     async getData() {
       let id = this.$route.params.id;
-      let response = await axios.get("http://159.223.45.216:3083/database/" + id);
-      this.result = response.data.menu;
-      this.name = response.data.menu.name;
-      this.ingredient = response.data.menu.recipe.ingredient;
-      this.steps = response.data.menu.recipe.steps;
-      this.imageURL = response.data.menu.imageURL;
+      let response = await axios.get("http://159.223.45.216:3083/searchMenu/" + id);
+      // let response = await axios.get("http://localhost:3083/searchMenu/" + id);
+
+      let data = response.data.menu
+      console.log(data);
+      this.name = data.name;
+      this.ingredient = data.recipe.Ingredient;
+      this.steps = data.recipe.Steps;
+      this.imageURL = data.imageURL;
       this.id = id;
     },
   },

@@ -56,4 +56,23 @@ router.get('/', async(request, response) => {
         
 })
 
+router.get('/:id', async(req, res) => {
+    const id = req.params['id']
+    let mock = mockData.menus
+    let data = mock.filter((item) => item.id === id)[0]
+
+    if (data.id === undefined || data.id === null) {
+        res.status(404).send({
+            message: "Not Found!"
+        })
+
+        return 0
+    }
+    
+    res.status(200).send({
+        message: "OK",
+        menu: data
+    })
+})
+
 module.exports = router;
