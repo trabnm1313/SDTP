@@ -36,3 +36,13 @@ describe("UnitTest", () => {
         expect(filterFunction(tags).length).toBe(0)
     })
 })
+
+describe("UnitTest for searchMenu", () => {
+    it("Search Food menu name 'ยำวุ้นเส้น'", () => {
+        expect(searchMenu("ยำขนมจีน")[0].name).toBe("ยำขนมจีน")
+    })
+
+    it("Search Food menu witn empty name", () => {
+        expect(searchMenu("")).toStrictEqual([])
+    })
+})
