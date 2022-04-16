@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
     if(tags.length != 0){
 
         //menuRef.where("tags", "array-contains-any", tags).get().then(querySnapshot => {
-            //let tempDataList = []
+            let tempDataList = []
 
             //Get data from Firebase
             // querySnapshot.forEach(menu => {
