@@ -8,36 +8,36 @@ import DetailRecipe from "../components/DetailRecipe.vue"
 
 
 const routes = [
-    {
-      path: "/",
-      name: "Home",
-      component: Home,
-    },
-    {
-      path: "/filtermenu",
-      name: "FilterMenu",
-      component: FilterMenu,
-    },
-    {
-      path: "/randomdisplay/:tags",
-      name: "RandomDisplay",
-      component: RandomDisplay
-    },
-    {
-      path: "/SearchRecipe",
-      name: "SearchRecipe",
-      component: SearchRecipe
-    },
-    {
-      path: "/DetailRecipe",
-      name: "DetailRecipe",
-      component: DetailRecipe
-    }
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
+  },
+  {
+    path: "/filtermenu",
+    name: "FilterMenu",
+    component: FilterMenu,
+  },
+  {
+    path: "/randomdisplay/:tags",
+    name: "RandomDisplay",
+    component: RandomDisplay
+  },
+  {
+    path: "/SearchRecipe",
+    name: "SearchRecipe",
+    component: SearchRecipe
+  },
+  {
+    path: "/DetailRecipe/:id",
+    name: "DetailRecipe",
+    component: DetailRecipe,
+  }
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
-  });
-  
+  history: createWebHistory(),
+  routes,
+});
+
 export default router;
