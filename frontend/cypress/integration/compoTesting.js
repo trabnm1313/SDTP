@@ -34,7 +34,7 @@ describe('Component Testing', () => {
         cy.server()
         cy.intercept({
             method: 'POST',
-            url: '/app/randomMenu',
+            url: 'http://159.223.45.216:3083/randomMenu',
         }, { menu: data }
         ).as('getData')
 
