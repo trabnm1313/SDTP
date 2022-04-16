@@ -36,6 +36,11 @@ pipeline {
             }
         }
 
+        stage('E2E test') {
+            steps {
+                echo 'npm e2e_test'
+            }
+        }
         stage('Deploy') {
             steps {
                 withCredentials([string(credentialsId: 'team2-backend-docker', variable: 'team2sshPass')]) {
@@ -52,12 +57,6 @@ pipeline {
                         sshCommand remote: remote, command: "rm -r SDTP"
                     }
                 }
-            }
-        }
-
-        stage('E2E test') {
-            steps {
-                echo 'npm e2e_test'
             }
         }
         stage('Notification') {
