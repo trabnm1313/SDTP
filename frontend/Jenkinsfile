@@ -29,7 +29,7 @@ pipeline {
         // }
         stage('Deploy') {
             steps {
-                withCredentials([string(credentialsId: 'team2-frontend-docker', variable: 'team2sshPass')]) {
+                withCredentials([string(credentialsId: 'team2-backend-docker', variable: 'team2sshPass')]) {
                     script {
                         def remote = [:]
                         remote.host = '159.65.12.177'
