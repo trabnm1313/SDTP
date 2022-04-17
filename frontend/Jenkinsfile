@@ -27,6 +27,24 @@ pipeline {
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'frontend/cypress/reports', reportFiles: 'report.html', reportName: 'HTML Report', reportTitles: ''])
             }
         }
+        stage('Deploy') {
+            steps {
+                withCredentials([string(credentialsId: 'team2-backend-docker', variable: 'team2sshPass')]) {
+                    script {
+                        def remote = [:]
+                        remote.host = '159.65.12.177'
+                        remote.name = 'team2-ssh'
+                        remote.user = 'root'
+                        remote.password = "${team2sshPass}"
+                        remote.allowAnyHosts = true
+
+                        sshCommand remote: remote, command: "git clone https://github.com/trabnm1313/SDTP.git"
+                        sshCommand remote: remote, command: "docker-compose -f SDTP/dockerCompose-frontend.yml up -d"
+                        sshCommand remote: remote, command: "rm -r SDTP"
+                    }
+                }
+            }
+        }
     }
     post { 
         always { 

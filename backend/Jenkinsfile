@@ -35,14 +35,28 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploy'
-            }
-        }
+
         stage('E2E test') {
             steps {
                 echo 'npm e2e_test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                withCredentials([string(credentialsId: 'team2-backend-docker', variable: 'team2sshPass')]) {
+                    script {
+                        def remote = [:]
+                        remote.host = '159.223.45.216'
+                        remote.name = 'team2-ssh'
+                        remote.user = 'root'
+                        remote.password = "${team2sshPass}"
+                        remote.allowAnyHosts = true
+
+                        sshCommand remote: remote, command: "git clone https://github.com/trabnm1313/SDTP.git"
+                        sshCommand remote: remote, command: "docker-compose -f SDTP/dockerCompose-backend.yml up -d"
+                        sshCommand remote: remote, command: "rm -r SDTP"
+                    }
+                }
             }
         }
         stage('Notification') {
