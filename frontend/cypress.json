@@ -1,13 +1,15 @@
 {
-    "baseUrl": "http://localhost:9000",
-    "reporter": "mochawesome",
-    "reporterOptions":{
-        "reportDir": "cypress/reports",
-        "reportFilename": "report",
-        "overwrite": false,
-        "html": true,
-        "json": true,
-        "charts": true
-    },
-    "video": false
+  "baseUrl": "http://localhost:9000",
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/reports",
+    "reportFilename": "report",
+    "overwrite": false,
+    "html": true,
+    "json": true,
+    "charts": true
+  },
+  "video": false,
+  "viewportWidth": 1280,
+  "viewportHeight": 720
 }

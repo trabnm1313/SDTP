@@ -50,3 +50,32 @@ describe("RandomMenuAPI", () => {
 
     afterAll(() => { server.close() })
 })
+
+describe("SearchMenuAPI", () => {
+    it("GET /searchMenu?name=ยำขนมจีน", () => {
+        return supertest(appController).get("/searchMenu").query({ name: "ยำขนมจีน" }).then(response => {
+            expect(response.body.menu[0].name).toBe("ยำขนมจีน")
+        })
+    })
+
+    it("GET /searchMenu?name=ก๋วยเตี๋ยวไก่ตุ๋นมะระ", () => {
+        return supertest(appController).get("/searchMenu").query({ name: "ก๋วยเตี๋ยวไก่ตุ๋นมะระ" }).then(response => {
+            expect(response.body.menu[0].name).toBe("ก๋วยเตี๋ยวไก่ตุ๋นมะระ")
+        })
+    })
+
+    it("GET /searchMenu?name=ขนมจีนผัดขี้เมากุ้ง", () => {
+        return supertest(appController).get("/searchMenu").query({ name: "ขนมจีนผัดขี้เมากุ้ง" }).then(response => {
+            expect(response.body.menu[0].name).toBe("ขนมจีนผัดขี้เมากุ้ง")
+        })
+    })
+
+    it("GET /searchMenu?name=", () => {
+        return supertest(appController).get("/searchMenu").query({ name: "" }).then(response => {
+            expect(response.body.status).toBe(400)
+        })
+    })
+
+
+    afterAll(() => { server.close() })
+})

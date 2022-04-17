@@ -1,5 +1,5 @@
-//const admin = require("../admin");
-//const db = admin.firestore();
+// const admin = require("../admin");
+// const db = admin.firestore();
 const express = require('express');
 const appController = express();
 const cors = require('cors')
@@ -19,7 +19,7 @@ const allowedOrigins = ['http://159.65.12.177:9100', 'http://159.65.12.177:9000'
 //     }
 // }));
 
-//appController.use(cors("*"))
+// appController.use(cors("*"))
 
 //Variables
 const PORT = 3083
@@ -27,10 +27,12 @@ const PORT = 3083
 //Routes Variables
 const randomMenuAPI = require("./randomMenuController")
 // const databaseAPI = require("./databaseController")
+const searchMenuAPI = require('./searchMenuAPI')
 
 //Routes uses
 appController.use("/randomMenu", randomMenuAPI)
 // appController.use("/database", databaseAPI)
+appController.use('/searchMenu', searchMenuAPI)
 
 appController.use(express.json())
 

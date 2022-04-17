@@ -14,7 +14,7 @@
                   <p class="is-size-4">อะไรนะ!</p>
                   <p class="is-size-4">มีเป้าหมายแล้วหรอ?</p>
                   <button class="button is-success m-2" @click="alert()">ซื้อจากร้าน</button>
-                  <button class="button is-danger m-2" @click="alert()">ลองทำเอง</button>
+                  <button class="button is-danger m-2" @click="goRecipe()">ลองทำเอง</button>
                 </div>  
               </div>
             </div>
@@ -37,6 +37,9 @@ export default {
   methods: {
     openFilter() {
       this.$router.push('/filtermenu')
+    },
+    goRecipe(){
+      this.$router.push('/SearchRecipe')
     },
     alert() {
       alert("ยังไม่พร้อมใช้งาน")
