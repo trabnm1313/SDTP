@@ -1,6 +1,0 @@
-version: "3"
-services:
-  back-end: 
-    build: "./backend"
-    ports:
-      - "3083:3083"
