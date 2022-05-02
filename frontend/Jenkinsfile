@@ -39,7 +39,7 @@ pipeline {
                         remote.allowAnyHosts = true
 
                         sshCommand remote: remote, command: "git clone https://github.com/trabnm1313/SDTP.git"
-                        sshCommand remote: remote, command: "docker-compose -f SDTP/dockerCompose-frontend.yml up -d"
+                        sshCommand remote: remote, command: "docker-compose -f SDTP/dockerCompose.yml up -d"
                         sshCommand remote: remote, command: "rm -r SDTP"
                     }
                 }
